@@ -1,0 +1,88 @@
+#
+# Create a new rep 'sandbox' on github.com
+#
+
+  gh repo create sandbox --public --clone --description "Tiny cross-machine Git testbed"
+
+     # * Creates a new public repo on GitHub called sandbox
+     # *  Adds the provided description
+     # * Clones it locally (because of '--clone')
+  
+#
+#  Create a  .gitignore file for a mixed C/Python project, telling Git to skip typical junk and environment-specific files.  
+#
+  cd sandox 
+  vi .gitignore
+          #(base) j2c@jackaroo:~/Development/sandbox$ cat .gitignore 
+           *.o
+           build/
+          .DS_Store
+          .vscode/
+          __pycache__/
+      
+  
+#
+#  edit some project files  
+#
+  vi README.md
+  vi hello.py
+  vi hello.cpp
+
+#
+# upload  the edited files to github with 'git add, commit and push'
+# (session on jackaroo from homenetwork)
+# 
+  git add README.md hello.py hello.cpp  # add specific files 
+                                        # `git add .` would add all files
+  git commit -m "quick update from jackaroo"
+ 
+  git push -u origin main               # upload my local 'main' branch  to 'origin' at github.com
+
+  git branch                            # list available brnaches and shows whihc is currently working branch
+  git branch -vv                        # same as above but shows more info
+
+   # example session:
+      (base) j2c@jackaroo:~/Development/sandbox$ git add .
+      (base) j2c@jackaroo:~/Development/sandbox$ git commit -m "Initial commit: README, .gitignore, hello.cpp, hello.py"
+      [main c29c704] Initial commit: README, .gitignore, hello.cpp, hello.py
+       4 files changed, 15 insertions(+)
+       create mode 100644 .gitignore
+       create mode 100644 README.md
+       create mode 100644 hello.cpp
+       create mode 100644 hello.py
+      (base) j2c@jackaroo:~/Development/sandbox$ git push -u origin main
+      Enumerating objects: 7, done.
+      Counting objects: 100% (7/7), done.
+      Delta compression using up to 12 threads
+      Compressing objects: 100% (3/3), done.
+      Writing objects: 100% (6/6), 662 bytes | 662.00 KiB/s, done.
+      Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+      To https://github.com/jjakowski/sandbox.git
+         bd5667c..c29c704  main -> main
+      branch 'main' set up to track 'origin/main'.
+
+#
+#  Test if everything works from "bigroo"
+#  clone, edit, gitt add, commit and push:
+#
+    gh auht status              
+    gh auth setup-git    # this is just to make sure that https authjentication works  OK
+
+    git clone https://github.com/jjakowski/sandbox.git        # c
+    
+    cd sandbox 
+    vi README.md 
+    git add  README.md  
+    git status        # shows which files are edited (in  green are staged for upload with 'git add', in  red are  not staged)
+    git commit  -m "Edits from bigroo"
+    git push     
+     
+    # You can now check  https://github.com/jjakowski/sandbox/README.md has been edited (added a  line:  "Bigroo: ubuntu"   
+
+
+#
+#    Tes isf everything from "BIGROO64"
+#
+#
+
+
